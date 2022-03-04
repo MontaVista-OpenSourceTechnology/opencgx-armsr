@@ -50,8 +50,9 @@ LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-security.git;branc
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cgl.git;branch=master;layer=meta-cgl-common \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cloud-services.git;branch=master \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-cgl.git;branch=master \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-arm.git;branch=master;layer=meta-arm-toolchain \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-arm.git;branch=master;layer=meta-arm \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-ti.git;branch=master \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-ti.git;branch=master;layer=meta-ti-bsp \
 MACHINE@k2hk-evm \
 DISTRO@mvista-cgx \
 "
