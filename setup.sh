@@ -53,7 +53,7 @@ LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-cgl.git
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-arm.git;branch=master;layer=meta-arm-toolchain \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-arm.git;branch=master;layer=meta-arm \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-ti.git;branch=master;layer=meta-ti-bsp \
-MACHINE@j721e-evm \
+MACHINE@j721e-evm-k3r5 \
 DISTRO@mvista-cgx \
 "
 TOPDIR=$(dirname $THIS_SCRIPT)
