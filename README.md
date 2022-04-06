@@ -1,6 +1,6 @@
-# Release repository for k2hk-evm
+# Release repository for j721e-evm
 
-Montavista Software, LLC. release of k2hk-evm. 
+Montavista Software, LLC. release of j721e-evm. 
 
 How to use:
 ==========
@@ -40,11 +40,11 @@ directory layout:
 ================
 ```
 opencgx-ti/
-       project - bitbake project for the k2hk-evm project build
+       project - bitbake project for the j721e-evm project build
        buildtools - build tools to provide minimal build requirement for poky builds
-       layers - layers for building k2hk-evm project
+       layers - layers for building j721e-evm project
        setup.sh - project setup script
        bin - various helper applications for setting up and maintaining the release directory
 ```
 
-Verfied machines: k2hk-evm 
+Verfied machines: j721e-evm 
