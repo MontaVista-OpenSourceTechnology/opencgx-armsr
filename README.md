@@ -5,7 +5,7 @@ Montavista Software, LLC. release of j721e-evm.
 How to use:
 ==========
 ```
-git clone --recursive https://github.com/MontaVista-OpenSourceTechnology/opencgx-ti
+git clone -b kirkstone --recursive https://github.com/MontaVista-OpenSourceTechnology/opencgx-ti
 cd opencgx-ti
 source setup.sh
 ```
