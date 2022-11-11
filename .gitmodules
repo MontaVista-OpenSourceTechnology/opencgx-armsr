@@ -43,6 +43,6 @@
 	url = https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-cgl.git
 	branch = kirkstone-cgx
 [submodule "layers/meta-montavista-armsr"]
-	path = layers/meta-ti
-	url = https://github.com/MontaVista-OpenSourceTechnology/meta-armsr.git
-	branch = kirkstone
+	path = layers/meta-montavista-armsr
+	url = https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-armsr
+	branch = main

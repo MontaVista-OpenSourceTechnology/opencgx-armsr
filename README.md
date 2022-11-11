@@ -1,12 +1,12 @@
-# Release repository for j721e-evm
+# Release repository for generic-arm64
 
-Montavista Software, LLC. release of j721e-evm. 
+Montavista Software, LLC. release of generic-arm64. 
 
 How to use:
 ==========
 ```
-git clone -b kirkstone --recursive https://github.com/MontaVista-OpenSourceTechnology/opencgx-ti
-cd opencgx-ti
+git clone -b kirkstone --recursive https://github.com/MontaVista-OpenSourceTechnology/opencgx-armsr
+cd opencgx-armsr
 source setup.sh
 ```
 Optionally, you can pass setup.sh a directory name to use instead of the
@@ -39,12 +39,12 @@ poky/oe-init-build-env script.
 directory layout:
 ================
 ```
-opencgx-ti/
-       project - bitbake project for the j721e-evm project build
+opencgx-armsr/
+       project - bitbake project for the generic-arm64 project build
        buildtools - build tools to provide minimal build requirement for poky builds
-       layers - layers for building j721e-evm project
+       layers - layers for building generic-arm64 project
        setup.sh - project setup script
        bin - various helper applications for setting up and maintaining the release directory
 ```
 
-Verfied machines: j721e-evm 
+Verfied machines: generic-arm64 

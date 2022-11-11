@@ -50,10 +50,10 @@ LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-security.git;branc
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cgl.git;branch=master;layer=meta-cgl-common \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cloud-services.git;branch=master \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-cgl.git;branch=master \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-arm.git;branch=master;layer=meta-arm-toolchain \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-arm.git;branch=master;layer=meta-arm \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-ti.git;branch=master;layer=meta-ti-bsp \
-MACHINE@j721e-evm-k3r5 \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-armsr.git;branch=master \
+MACHINE@generic-arm64 \
+CONFIG@PREFERRED_PROVIDER_virtual/kernel=linux-mvista \
+CONFIG@USE_SYSTEMD=1 \
 DISTRO@mvista-cgx \
 "
 TOPDIR=$(dirname $THIS_SCRIPT)
@@ -210,13 +210,17 @@ for config in $REPO_CONFIG; do
           DL_TREE="git://$TOPDIR/sources-export/$(basename $TREE | sed s,.git,,)"
           echo "$(echo $META)_TREE = '$DL_TREE'" >> conf/local-content.conf
           echo "$(echo $META)_BRANCH = '$BRANCH'" >> conf/local-content.conf
-          echo "BB_HASHBASE_WHITELIST_append += \"$(echo $META)_TREE\"" >> conf/local-content.conf
+          echo "BB_HASHBASE_WHITELIST:append += \"$(echo $META)_TREE\"" >> conf/local-content.conf
           echo >> conf/local-content.conf
     fi
     if [ "$VAR" = "CONFIG" ] ; then
        option=$(echo $VAL | cut -d = -f 1)
        setting=$(echo $VAL | cut -d = -f 2)
-       echo "$option ?= '$setting'" >> conf/local-content.conf
+       if [ -z "$(echo $option | grep append$)" ] ; then
+          echo "$option ?= '$setting'" >> conf/local-content.conf
+       else
+          echo "$option ?= ' $setting '" >> conf/local-content.conf
+       fi
     fi   
 done
 if [ -n "$SOURCE_MIRROR_URL" ] ; then
