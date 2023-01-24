@@ -102,13 +102,13 @@ instructions.  You can derive them from the makefile in
 scripts/board-qemu-arm.mk.
 
 As an example, you can use:
-
+```
   qemu-system-aarch64 -machine virt,secure=on -cpu cortex-a57 -smp 2 \
     -m 1024 -no-acpi \
     -drive if=virtio,format=raw,file=core-image-minimal-generic-arm64.wic \
     -drive if=pflash,unit=0,format=raw,file=nor_flash.bin
     -net nic,model=virtio -net user,hostfwd=tcp::5556-10.0.2.15:22
-
+```
 where you will obviously substitute your image for the wic file.
 
 ### NXP i.MX8
