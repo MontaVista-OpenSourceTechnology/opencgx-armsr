@@ -89,6 +89,41 @@ https://github.com/MontaVista-OpenSourceTechnology/rockpro64-firmware
 either by building it yourself or using the binaries provided in the
 Release area.
 
+Note that the rockpro firmware runs the serial port at 1500000 baud,
+you will have to adjust when the board boots the kernel, as the kernel
+defaults to 115200 baud.
+
+### QEMU
+
+The instructions at https://github.com/glikely/u-boot-tfa-build show
+how to build a qemu version of nor_flash.bin that can be used with
+qemu.  However, it doesn't give much in the way of helpful usage
+instructions.  You can derive them from the makefile in
+scripts/board-qemu-arm.mk.
+
+As an example, you can use:
+
+  qemu-system-aarch64 -machine virt,secure=on -cpu cortex-a57 -smp 2 \
+    -m 1024 -no-acpi \
+    -drive if=virtio,format=raw,file=core-image-minimal-generic-arm64.wic \
+    -drive if=pflash,unit=0,format=raw,file=nor_flash.bin
+    -net nic,model=virtio -net user,hostfwd=tcp::5556-10.0.2.15:22
+
+where you will obviously substitute your image for the wic file.
+
+### NXP i.MX8
+
+NXP says it supports SystemReady on its i.MX8 boards.  There were
+issues making this work, though.  The standard binary firmware builds
+didn't work, and building from scratch didn't work.
+
+MontaVista worked on the firmware and got it running on the i.MX8MQ
+EVK board.  The build for this is at
+https://github.com/MontaVista-OpenSourceTechnology/imx-systemready-firmware.git
+
+With that firmware in eMMC, the standard wic image will boot from SD
+card or USB stick.
+
 ### Raspberry Pi 4B
 
 See
