@@ -45,4 +45,4 @@
 [submodule "layers/meta-montavista-armsr"]
 	path = layers/meta-montavista-armsr
 	url = https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-armsr
-	branch = main
+	branch = scarthgap-cgx 
