@@ -5,7 +5,7 @@ Montavista Software, LLC. release of generic-arm64.
 How to use:
 ==========
 ```
-git clone -b kirkstone --recursive https://github.com/MontaVista-OpenSourceTechnology/opencgx-armsr
+git clone -b scarthgap --recursive https://github.com/MontaVista-OpenSourceTechnology/opencgx-armsr
 cd opencgx-armsr
 source setup.sh
 ```
