@@ -79,16 +79,16 @@ if [ ! -d buildtools ] ; then
          check_lynx || $EXIT 1
          TMPFILE=`mktemp --suffix=.html`
          fetch_command $TMPFILE $(echo $BUILD_TOOLS_LOCATION | sed s,/$,,)
-         buildtar=$(lynx -dump -nolist $TMPFILE |
-            grep "\.sh" | grep -v md5sum | grep -v '..>' | sed "s:\[TXT\]::" | while read A B C; do echo $A; done)
+         buildtar=$(lynx --width 200 -dump -nolist $TMPFILE |
+            grep "\.sh" | grep -v md5sum | grep -v '..>' | sed "s:\[TXT\]::" | while read A B C; do echo $A; done | grep sh$ | grep extended | grep x86_64)
          rm -f $TMPFILE
       fi
       if [ "$buildtar" = "[" ] ; then
          check_lynx || $EXIT 1
          TMPFILE=`mktemp --suffix=.html`
          fetch_command $TMPFILE $(echo $BUILD_TOOLS_LOCATION | sed s,/$,,)
-         buildtar=$(lynx -dump -nolist $TMPFILE | 
-             grep "\.sh" | grep -v md5sum | grep -v '..>' | while read A B C D; do echo $C; done)
+         buildtar=$(lynx --width 200 -dump -nolist $TMPFILE | 
+             grep "\.sh" | grep -v md5sum | grep -v '..>' | while read A B C D; do echo $C; done | grep sh$ | grep extended | grep x86_64)
          rm -f $TMPFILE
       fi
 
