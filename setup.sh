@@ -137,7 +137,7 @@ if [ -z "$TEMPLATECONF" -o ! -d "$TEMPLATECONF" ] ; then
     export TEMPLATECONF=$TOPDIR/layers/meta-montavista-cgx/conf/templates/default
 fi
 
-source $TOPDIR/layers/poky/oe-init-build-env $buildDir 
+source $TOPDIR/layers/openembedded-core/oe-init-build-env $buildDir 
 if [ "$?" != "0" ] ; then
    $EXIT 1
 fi
