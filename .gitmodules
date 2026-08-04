@@ -1,7 +1,15 @@
-[submodule "layers/poky"]
-	path = layers/poky
-	url = https://github.com/MontaVista-OpenSourceTechnology/openembedded-core.git
-	branch = wrynose
+[submodule "layers/openembedded-core"]
+        path = layers/openembedded-core
+        url = https://github.com/MontaVista-OpenSourceTechnology/openembedded-core.git
+        branch = wrynose
+[submodule "layers/bitbake"]
+        path = layers/bitbake
+        url = https://github.com/MontaVista-OpenSourceTechnology/bitbake.git
+        branch = 2.18
+[submodule "layers/meta-yocto"]
+        path = layers/meta-yocto
+        url = https://github.com/MontaVista-OpenSourceTechnology/meta-yocto.git
+        branch = wrynose
 [submodule "layers/meta-openembedded"]
 	path = layers/meta-openembedded
 	url = https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git
