@@ -28,30 +28,29 @@ mkdir -p $buildDir
 buildDir=$(readlink -f $buildDir)
 
 REPO_CONFIG="\
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/poky.git;branch=scarthgap-cgx;layer=meta \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/poky.git;branch=scarthgap-cgx;layer=meta-poky \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/poky.git;branch=scarthgap-cgx;layer=meta-yocto-bsp \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=scarthgap-cgx;layer=meta-oe \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=scarthgap-cgx;layer=meta-python \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=scarthgap-cgx;layer=meta-networking \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=scarthgap-cgx;layer=meta-filesystems \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=scarthgap-cgx;layer=meta-webserver \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-clang.git;branch=scarthgap-cgx \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-virtualization.git;branch=scarthgap-cgx \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-qa.git;branch=scarthgap-cgx;layer=meta-qa-framework \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-qa.git;branch=scarthgap-cgx;layer=meta-qa-testsuites \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-cgx.git;branch=scarthgap-cgx \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=scarthgap-cgx;layer=meta-perl \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=scarthgap-cgx;layer=meta-gnome \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=scarthgap-cgx;layer=meta-multimedia \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=scarthgap-cgx;layer=meta-xfce \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-selinux.git;branch=scarthgap-cgx \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-security.git;branch=scarthgap-cgx \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cgl.git;branch=scarthgap-cgx;layer=meta-cgl-common \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cloud-services.git;branch=scarthgap-cgx \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-cgl.git;branch=scarthgap-cgx \
-LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-armsr.git;branch=scarthgap-cgx \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/openembedded-core.git;branch=wrynose;layer=meta \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=wrynose;layer=meta-oe \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=wrynose;layer=meta-python \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=wrynose;layer=meta-networking \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=wrynose;layer=meta-filesystems \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=wrynose;layer=meta-webserver \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-clang.git;branch=wrynose \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-virtualization.git;branch=wrynose \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-qa.git;branch=wrynose;layer=meta-qa-framework \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-qa.git;branch=wrynose;layer=meta-qa-testsuites \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-cgx.git;branch=wrynose \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=wrynose;layer=meta-perl \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=wrynose;layer=meta-gnome \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=wrynose;layer=meta-multimedia \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;branch=wrynose;layer=meta-xfce \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-selinux.git;branch=wrynose \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-security.git;branch=wrynose \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cgl.git;branch=wrynose;layer=meta-cgl-common \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cloud-services.git;branch=wrynose \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-cgl.git;branch=wrynose \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-armsr.git;branch=wrynose \
 MACHINE@generic-arm64 \
+MACHINE@qemu-generic-arm64 \
 CONFIG@PREFERRED_PROVIDER_virtual/kernel=linux-mvista \
 CONFIG@USE_SYSTEMD=1 \
 DISTRO@mvista-cgx \
@@ -70,8 +69,8 @@ for config in $REPO_CONFIG; do
     fi
 done
 
-export BUILD_TOOLS_LOCATION=https://downloads.yoctoproject.org/releases/yocto/yocto-5.0/buildtools/
-export buildtar=x86_64-buildtools-extended-nativesdk-standalone-5.0.sh
+export BUILD_TOOLS_LOCATION=https://downloads.yoctoproject.org/releases/yocto/yocto-6.0/buildtools/
+export buildtar=x86_64-buildtools-extended-nativesdk-standalone-6.0.sh
 bash $TOPDIR/bin/fetch-buildtools || $EXIT 1
 
 if which python 2>/dev/null >/dev/null; then 
@@ -284,7 +283,7 @@ if [ "$MAKEDROP" != "1" ] ; then
    PROJECT_DIR=\$(dirname \$(readlink -f \$THIS_SCRIPT))
    cd \$PROJECT_DIR
    source $SCRIPT_RELPATH/buildtools/environment-setup-*
-   source $SCRIPT_RELPATH/layers/poky/oe-init-build-env \$PROJECT_DIR
+   source $SCRIPT_RELPATH/layers/openembedded-core/oe-init-build-env \$PROJECT_DIR
 EOF
    rm -rf tmp-glibc
 else
