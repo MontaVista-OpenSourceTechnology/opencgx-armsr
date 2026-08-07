@@ -17,7 +17,7 @@ pipeline {
         booleanParam(name: 'FORCE_BUILD', defaultValue: false, description: 'Build even when tracked revisions are unchanged')
         string(name: 'BUILD_DIR', defaultValue: 'jenkins-build', description: 'Persistent Yocto build directory')
         string(name: 'IMAGE', defaultValue: 'core-image-minimal', description: 'BitBake image target')
-        string(name: 'MACHINE', defaultValue: '', description: 'Optional MACHINE override')
+        string(name: 'MACHINE', defaultValue: '', description: 'Override MACHINE; blank uses the last MACHINE@ entry in setup.sh')
         string(name: 'BUILD_COMMAND', defaultValue: '', description: 'Optional complete build command')
         booleanParam(name: 'QEMU_TESTS', defaultValue: false, description: 'Boot with runqemu and execute runtime tests')
         string(name: 'QEMU_MACHINE', defaultValue: '', description: 'QEMU-capable MACHINE, e.g. qemu-generic-arm64')
@@ -70,7 +70,7 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                     set -euo pipefail
-                    if [[ -n "$BUILD_COMMAND" ]]; then
+                    if [[ -n "${BUILD_COMMAND:-}" ]]; then
                         bash -lc "$BUILD_COMMAND"
                     else
                         .ci/jenkins-build.sh
