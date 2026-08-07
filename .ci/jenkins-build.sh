@@ -33,9 +33,23 @@ if [[ "${QEMU_TESTS:-false}" == true && -z "${QEMU_MACHINE:-}" ]]; then
 fi
 
 initial_machine=${MACHINE:-}
-if [[ "${QEMU_TESTS:-false}" == true && -z "$initial_machine" ]]; then
-    initial_machine=$QEMU_MACHINE
+if [[ -z "$initial_machine" ]]; then
+    initial_machine=$(awk '
+        {
+            for (field = 1; field <= NF; field++) {
+                if ($field ~ /^MACHINE@[^[:space:]\\]+$/) {
+                    machine = $field
+                    sub(/^MACHINE@/, "", machine)
+                }
+            }
+        }
+        END { print machine }
+    ' setup.sh)
 fi
+[[ -n "$initial_machine" ]] || {
+    echo 'No MACHINE parameter or MACHINE@ entry was found in setup.sh' >&2
+    exit 2
+}
 set_machine "$initial_machine"
 bitbake "$image"
 
