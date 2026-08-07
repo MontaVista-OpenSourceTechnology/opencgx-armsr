@@ -1,5 +1,5 @@
 pipeline {
-    agent { label "${params.AGENT_LABEL}" }
+    agent any
 
     options {
         skipDefaultCheckout(true)
@@ -14,7 +14,6 @@ pipeline {
     }
 
     parameters {
-        string(name: 'AGENT_LABEL', defaultValue: 'linux', description: 'Jenkins agent label')
         booleanParam(name: 'FORCE_BUILD', defaultValue: false, description: 'Build even when tracked revisions are unchanged')
         string(name: 'BUILD_DIR', defaultValue: 'jenkins-build', description: 'Persistent Yocto build directory')
         string(name: 'IMAGE', defaultValue: 'core-image-minimal', description: 'BitBake image target')

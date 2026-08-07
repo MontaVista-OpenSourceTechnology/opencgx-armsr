@@ -12,6 +12,17 @@ source "$build_dir/setup.sh"
 # job parameters cannot leave a previous MACHINE or test selection behind.
 : > conf/auto.conf
 
+# Keep downloaded sources and shared-state artifacts outside the workspace so
+# they survive workspace cleanup and can be reused by other OpenCGX jobs run by
+# the same Jenkins user.
+download_dir=${YOCTO_DOWNLOAD_DIR:-$HOME/downloads}
+sstate_dir=${YOCTO_SSTATE_DIR:-$HOME/sstate-cache}
+mkdir -p "$download_dir" "$sstate_dir"
+{
+    printf 'DL_DIR = "%s"\n' "$download_dir"
+    printf 'SSTATE_DIR = "%s"\n' "$sstate_dir"
+} >> conf/auto.conf
+
 set_machine() {
     [[ -z "$1" ]] || printf '\nMACHINE = "%s"\n' "$1" >> conf/auto.conf
 }
