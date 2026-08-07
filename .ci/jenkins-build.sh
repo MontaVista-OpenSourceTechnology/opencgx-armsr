@@ -5,8 +5,15 @@ set -eo pipefail
 
 build_dir=${BUILD_DIR:-jenkins-build}
 image=${IMAGE:-core-image-minimal}
+repository_root=$(git rev-parse --show-toplevel)
+top_level_setup=$repository_root/setup.sh
+[[ -f "$top_level_setup" ]] || {
+    echo "Top-level setup script not found: $top_level_setup" >&2
+    exit 2
+}
+[[ "$build_dir" == /* ]] || build_dir=$repository_root/$build_dir
 export ALLOW_UPDATE=0
-bash setup.sh "$build_dir"
+bash "$top_level_setup" "$build_dir"
 # shellcheck disable=SC1090
 source "$build_dir/setup.sh"
 
@@ -46,10 +53,10 @@ if [[ -z "$initial_machine" ]]; then
             }
         }
         END { print machine }
-    ' setup.sh)
+    ' "$top_level_setup")
 fi
 [[ -n "$initial_machine" ]] || {
-    echo 'No MACHINE parameter or MACHINE@ entry was found in setup.sh' >&2
+    echo "No MACHINE parameter or MACHINE@ entry was found in $top_level_setup" >&2
     exit 2
 }
 set_machine "$initial_machine"
