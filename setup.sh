@@ -46,6 +46,8 @@ LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-openembedded.git;b
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-selinux.git;branch=wrynose \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-security.git;branch=wrynose \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cgl.git;branch=wrynose;layer=meta-cgl-common \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-arm.git;branch=wrynose;layer=meta-arm \
+LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-arm.git;branch=wrynose;layer=meta-arm-toolchain \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-cloud-services.git;branch=wrynose \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-cgl.git;branch=wrynose \
 LAYER@https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-armsr.git;branch=wrynose \
