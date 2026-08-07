@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# Yocto environment scripts commonly read optional variables before assigning
+# defaults, so nounset (-u) is intentionally not enabled here.
+set -eo pipefail
 
 build_dir=${BUILD_DIR:-jenkins-build}
 image=${IMAGE:-core-image-minimal}
