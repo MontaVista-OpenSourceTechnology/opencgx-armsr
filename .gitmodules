@@ -54,3 +54,7 @@
 	path = layers/meta-montavista-armsr
 	url = https://github.com/MontaVista-OpenSourceTechnology/meta-montavista-armsr
 	branch = wrynose 
+[submodule "layers/meta-arm"]
+	path = layers/meta-arm
+	url = https://github.com/MontaVista-OpenSourceTechnology/meta-arm
+        branch = wrynose
