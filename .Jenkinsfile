@@ -10,7 +10,7 @@ pipeline {
 
     triggers {
         // Normal SCM polling does not inspect submodule branch tips.
-        cron('H/15 * * * *')
+        cron('H H/12 * * *')
     }
 
     parameters {
@@ -19,8 +19,8 @@ pipeline {
         string(name: 'IMAGE', defaultValue: 'core-image-minimal', description: 'BitBake image target')
         string(name: 'MACHINE', defaultValue: '', description: 'Override MACHINE; blank uses the last MACHINE@ entry in setup.sh')
         string(name: 'BUILD_COMMAND', defaultValue: '', description: 'Optional complete build command')
-        booleanParam(name: 'QEMU_TESTS', defaultValue: false, description: 'Boot with runqemu and execute runtime tests')
-        string(name: 'QEMU_MACHINE', defaultValue: '', description: 'QEMU-capable MACHINE, e.g. qemu-generic-arm64')
+        booleanParam(name: 'QEMU_TESTS', defaultValue: true, description: 'Boot with runqemu and execute runtime tests')
+        string(name: 'QEMU_MACHINE', defaultValue: '', description: 'QEMU-capable MACHINE; blank uses the detected build MACHINE')
         string(name: 'TEST_SUITES', defaultValue: 'ping ssh date df', description: 'Space-separated OEQA runtime test suites')
         string(name: 'UPSTREAM_POLL_TIMEOUT', defaultValue: '30', description: 'Seconds allowed for each remote query')
     }
@@ -38,9 +38,10 @@ pipeline {
             steps {
                 script {
                     int status = sh(script: ".ci/check-upstreams.sh --state '${env.UPSTREAM_STATE_FILE}' --timeout '${params.UPSTREAM_POLL_TIMEOUT}'", returnStatus: true)
+                    boolean timerBuild = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
                     if (status == 0) {
                         env.SHOULD_BUILD = 'true'
-                    } else if (status == 3 && params.FORCE_BUILD) {
+                    } else if (status == 3 && (params.FORCE_BUILD || !timerBuild)) {
                         sh 'cp "$UPSTREAM_STATE_FILE" "${UPSTREAM_STATE_FILE}.pending"'
                         env.SHOULD_BUILD = 'true'
                     } else if (status == 3) {
@@ -89,7 +90,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: "${params.BUILD_DIR}/tmp/log/**/*,${params.BUILD_DIR}/tmp/testimage/**/*", allowEmptyArchive: true
+            archiveArtifacts artifacts: "${params.BUILD_DIR}/tmp/deploy/**/*,${params.BUILD_DIR}/tmp/log/**/*,${params.BUILD_DIR}/tmp/testimage/**/*", allowEmptyArchive: true
             junit testResults: "${params.BUILD_DIR}/tmp/log/oeqa/**/*.xml,${params.BUILD_DIR}/tmp/testimage/**/*.xml", allowEmptyResults: true
         }
     }

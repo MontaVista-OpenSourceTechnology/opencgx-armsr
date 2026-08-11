@@ -34,11 +34,6 @@ set_machine() {
     [[ -z "$1" ]] || printf '\nMACHINE = "%s"\n' "$1" >> conf/auto.conf
 }
 
-if [[ "${QEMU_TESTS:-false}" == true && -z "${QEMU_MACHINE:-}" ]]; then
-    echo 'QEMU_MACHINE is required when QEMU_TESTS is enabled' >&2
-    exit 2
-fi
-
 initial_machine=${MACHINE:-}
 if [[ -z "$initial_machine" ]]; then
     initial_machine=$(awk '
@@ -61,8 +56,9 @@ set_machine "$initial_machine"
 bitbake "$image"
 
 if [[ "${QEMU_TESTS:-false}" == true ]]; then
-    if [[ "$initial_machine" != "$QEMU_MACHINE" ]]; then
-        set_machine "$QEMU_MACHINE"
+    qemu_machine=${QEMU_MACHINE:-$initial_machine}
+    if [[ "$initial_machine" != "$qemu_machine" ]]; then
+        set_machine "$qemu_machine"
         bitbake "$image"
     fi
     {
