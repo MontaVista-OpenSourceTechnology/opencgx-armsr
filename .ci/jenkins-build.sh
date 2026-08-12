@@ -28,6 +28,7 @@ mkdir -p "$download_dir" "$sstate_dir"
 {
     printf 'DL_DIR = "%s"\n' "$download_dir"
     printf 'SSTATE_DIR = "%s"\n' "$sstate_dir"
+    printf 'TEST_RUNQEMUPARAMS = "slirp"'
 } >> conf/auto.conf
 
 set_machine() {
