@@ -4,7 +4,7 @@
 set -eo pipefail
 
 build_dir=${BUILD_DIR:-jenkins-build}
-image=${IMAGE:-core-image-minimal}
+image=${IMAGE:-default-image}
 repository_root=$(git rev-parse --show-toplevel)
 top_level_setup=$repository_root/setup.sh
 [[ -f "$top_level_setup" ]] || {
