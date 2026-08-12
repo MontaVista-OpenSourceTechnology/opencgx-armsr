@@ -64,7 +64,7 @@ if [[ "${QEMU_TESTS:-false}" == true ]]; then
     fi
     {
         echo 'IMAGE_CLASSES += "testimage"'
-        printf 'TEST_SUITES = "%s"\n' "${TEST_SUITES:-ping ssh date df}"
+        printf 'TEST_SUITES = "%s"\n' "${TEST_SUITES:-ping date df ssh scp python perl gi ptest parselogs logrotate connman systemd oe_syslog pam stap ldd xorg kernelmodule gcc buildcpio buildlzip buildgalculator dnf rpm opkg apt weston go rust}"
     } >> conf/auto.conf
     bitbake "$image" -c testimage
 fi
