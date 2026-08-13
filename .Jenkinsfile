@@ -16,12 +16,12 @@ pipeline {
     parameters {
         booleanParam(name: 'FORCE_BUILD', defaultValue: false, description: 'Build even when tracked revisions are unchanged')
         string(name: 'BUILD_DIR', defaultValue: 'jenkins-build', description: 'Persistent Yocto build directory')
-        string(name: 'IMAGE', defaultValue: 'core-image-minimal', description: 'BitBake image target')
+        string(name: 'IMAGE', defaultValue: '', description: 'BitBake image target')
         string(name: 'MACHINE', defaultValue: '', description: 'Override MACHINE; blank uses the last MACHINE@ entry in setup.sh')
         string(name: 'BUILD_COMMAND', defaultValue: '', description: 'Optional complete build command')
         booleanParam(name: 'QEMU_TESTS', defaultValue: true, description: 'Boot with runqemu and execute runtime tests')
         string(name: 'QEMU_MACHINE', defaultValue: '', description: 'QEMU-capable MACHINE; blank uses the detected build MACHINE')
-        string(name: 'TEST_SUITES', defaultValue: 'ping ssh date df', description: 'Space-separated OEQA runtime test suites')
+        string(name: 'TEST_SUITES', defaultValue: '', description: 'Space-separated OEQA runtime test suites')
         string(name: 'UPSTREAM_POLL_TIMEOUT', defaultValue: '30', description: 'Seconds allowed for each remote query')
     }
 
